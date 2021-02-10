@@ -20,8 +20,7 @@ env_logger   = "0.7"
 log          = { version = "0.4", features = ["std"] }
 structopt    = "0.3"
 thiserror    = "1.0"
-# pnet         = "0.26.0"
-pnet         = { path = "../libpnet" }
+pnet         = { git = "https://github.com/libpnet/libpnet.git", rev = "5b7103ab4e651713f6dc4359e264b6ddee063d6a" }
 
 [build-dependencies]
 bindgen = "0.53"

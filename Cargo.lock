@@ -284,6 +284,7 @@ checksum = "19b17cddbe7ec3f8bc800887bab5e717348c95ea2ca0b1bf0837fb964dc67099"
 [[package]]
 name = "pnet"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "ipnetwork",
  "pnet_base",
@@ -296,10 +297,12 @@ dependencies = [
 [[package]]
 name = "pnet_base"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 
 [[package]]
 name = "pnet_datalink"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "ipnetwork",
  "libc",
@@ -311,6 +314,7 @@ dependencies = [
 [[package]]
 name = "pnet_macros"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "regex",
  "syntex",
@@ -320,6 +324,7 @@ dependencies = [
 [[package]]
 name = "pnet_macros_support"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "pnet_base",
 ]
@@ -327,6 +332,7 @@ dependencies = [
 [[package]]
 name = "pnet_packet"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "glob 0.2.11",
  "pnet_base",
@@ -338,6 +344,7 @@ dependencies = [
 [[package]]
 name = "pnet_sys"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "libc",
  "winapi 0.3.9",
@@ -346,6 +353,7 @@ dependencies = [
 [[package]]
 name = "pnet_transport"
 version = "0.27.2"
+source = "git+https://github.com/libpnet/libpnet.git?rev=5b7103ab4e651713f6dc4359e264b6ddee063d6a#5b7103ab4e651713f6dc4359e264b6ddee063d6a"
 dependencies = [
  "libc",
  "pnet_base",
