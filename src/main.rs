@@ -11,7 +11,7 @@ use std::cmp;
 use std::thread;
 use std::time;
 
-use pring::*;
+use txrx_icmp::*;
 
 use anyhow::{Context, Result};
 use dns_lookup;

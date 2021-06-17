@@ -351,6 +351,7 @@ dependencies = [
  "pnet",
  "structopt",
  "thiserror",
+ "txrx-icmp",
 ]
 
 [[package]]
@@ -531,6 +532,20 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "txrx-icmp"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bindgen",
+ "byteorder",
+ "dns-lookup",
+ "env_logger",
+ "log",
+ "pnet",
+ "thiserror",
 ]
 
 [[package]]
