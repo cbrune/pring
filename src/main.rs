@@ -20,8 +20,8 @@ use pnet::packet::icmp;
 use pnet::packet::icmpv6;
 use pnet::packet::ip::IpNextHeaderProtocols;
 use pnet::packet::Packet;
+use pnet::transport::TransportChannelType;
 use pnet::transport::{icmp_packet_iter, icmpv6_packet_iter, transport_channel};
-use pnet::transport::{TransportChannelType, TransportProtocol};
 
 use structopt::StructOpt;
 
@@ -61,13 +61,13 @@ fn main() -> Result<()> {
         destination_addrs
             .iter()
             .find(|ip| ip.is_ipv4())
-            .ok_or(AppError::NoIpv4AddressFound(arguments.destination.clone()))?
+            .ok_or(IcmpError::NoIpv4AddressFound(arguments.destination.clone()))?
             .to_owned()
     } else if arguments.ipv6_only {
         destination_addrs
             .iter()
             .find(|ip| ip.is_ipv6())
-            .ok_or(AppError::NoIpv6AddressFound(arguments.destination.clone()))?
+            .ok_or(IcmpError::NoIpv6AddressFound(arguments.destination.clone()))?
             .to_owned()
     } else {
         // take the first one
@@ -76,13 +76,13 @@ fn main() -> Result<()> {
     debug!("Using destination_ip: {:?}", destination_ip);
 
     let transport_protocol = if destination_ip.is_ipv4() {
-        TransportProtocol::Ipv4(IpNextHeaderProtocols::Icmp)
+        IpNextHeaderProtocols::Icmp
     } else {
-        TransportProtocol::Ipv6(IpNextHeaderProtocols::Icmpv6)
+        IpNextHeaderProtocols::Icmpv6
     };
 
     let (mut packet_tx, mut packet_rx) =
-        transport_channel(1024, TransportChannelType::Layer4(transport_protocol))
+        transport_channel(1024, TransportChannelType::Layer3(transport_protocol))
             .context("Error creating ICMP transport channel")?;
 
     packet_tx
@@ -105,8 +105,9 @@ fn main() -> Result<()> {
         debug!("Sending packet: {}", i);
 
         let (rx_length, sequence_number, ping_rtt) = match transport_protocol {
-            TransportProtocol::Ipv4(_) => {
+            IpNextHeaderProtocols::Icmp => {
                 let _ = send_icmp_v4(
+                    &interface,
                     &mut packet_tx,
                     &destination_ip,
                     (i % (u16::MAX as usize)) as u16,
@@ -154,7 +155,7 @@ fn main() -> Result<()> {
                     ping_rtt,
                 )
             }
-            TransportProtocol::Ipv6(_) => {
+            IpNextHeaderProtocols::Icmpv6 => {
                 let _ = send_icmp_v6(
                     &interface,
                     &mut packet_tx,
@@ -198,6 +199,7 @@ fn main() -> Result<()> {
                 let sequence_number = icmpv6_echo_reply_get_sequence_number(rx_buffer);
                 (rx_buffer.len() + 4, sequence_number, ping_rtt)
             }
+            _ => unreachable!(),
         };
 
         println!(
